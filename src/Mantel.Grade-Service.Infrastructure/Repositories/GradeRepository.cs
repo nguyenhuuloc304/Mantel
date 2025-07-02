@@ -1,13 +1,7 @@
-﻿using Mantel.Common.Data;
-using Mantel.Grade_Service.Domain.Entities;
+﻿using Mantel.Grade_Service.Domain.Entities;
 using Mantel.Grade_Service.Domain.Interfaces;
 using Mantel.Grade_Service.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Mantel.Grade_Service.Infrastructure.Repositories
 {

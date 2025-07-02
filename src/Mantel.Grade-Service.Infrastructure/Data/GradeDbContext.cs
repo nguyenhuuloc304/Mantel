@@ -1,13 +1,5 @@
-﻿using Mantel.Common.Data;
-using Mantel.Grade_Service.Domain.Entities;
+﻿using Mantel.Grade_Service.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Reflection.Emit;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Mantel.Grade_Service.Infrastructure.Data
 {

@@ -4,11 +4,6 @@ using Mantel.Student_Service.Domain.Entities;
 using Mantel.Student_Service.Domain.Interfaces;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Mantel.Student_Service.Application.Features.Students.Handlers.QueryHandlers
 {

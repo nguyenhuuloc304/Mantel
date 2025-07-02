@@ -1,10 +1,4 @@
-﻿using Mantel.Common.Data.Interfaces;
-using Mantel.Grade_Service.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Mantel.Grade_Service.Domain.Entities;
 
 namespace Mantel.Grade_Service.Domain.Interfaces
 {

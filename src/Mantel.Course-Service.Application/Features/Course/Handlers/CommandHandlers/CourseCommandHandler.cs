@@ -4,11 +4,6 @@ using Mantel.Course_Service.Application.Features.Courses.Commands;
 using Mantel.Course_Service.Domain.Entities;
 using Mantel.Course_Service.Domain.Interfaces;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Mantel.Course_Service.Application.Features.Courses.Handlers.CommandHandlers
 {
