@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using Mantel.Course_Service.Application.DTOs;
+using Mantel.Course_Service.Application.Features.Courses.Commands;
+using Mantel.Course_Service.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

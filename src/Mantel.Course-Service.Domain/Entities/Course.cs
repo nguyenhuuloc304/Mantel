@@ -9,8 +9,8 @@ namespace Mantel.Course_Service.Domain.Entities
 {
     public class Course : BaseEntity
     {
-        public Guid StudentId { get; private set; }
-        public Guid CourseId { get; private set; }
-        public double Value { get; private set; }
+        public Guid Id { get; private set; }
+        public string Name { get; private set; }
+        public int Credit { get; private set; }
     }
 }
