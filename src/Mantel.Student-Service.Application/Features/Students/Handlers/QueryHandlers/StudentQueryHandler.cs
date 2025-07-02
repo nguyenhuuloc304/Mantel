@@ -16,16 +16,16 @@ namespace Mantel.Student_Service.Application.Features.Students.Handlers.QueryHan
         IRequestHandler<GetAllStudentsQuery, PagedQueryResult<Student>>,
         IRequestHandler<GetStudentByIdQuery, Student>
     {
-        private readonly IStudentRepository _productRepo;
+        private readonly IStudentRepository _studentRepo;
 
-        public StudentQueryHandler(IStudentRepository productRepo)
+        public StudentQueryHandler(IStudentRepository studentRepo)
         {
-            _productRepo = productRepo;
+            _studentRepo = studentRepo;
         }
 
         public async Task<PagedQueryResult<Student>> Handle(GetAllStudentsQuery query, CancellationToken cancellationToken)
         {
-            var dataQueryable = _productRepo.GetAllStudent();
+            var dataQueryable = _studentRepo.GetAllStudent();
             var data = await dataQueryable.Skip((query.Page - 1) * query.PageSize)
                                     .Take(query.PageSize)
                                     .ToListAsync();
@@ -36,7 +36,7 @@ namespace Mantel.Student_Service.Application.Features.Students.Handlers.QueryHan
 
         public async Task<Student> Handle(GetStudentByIdQuery query, CancellationToken cancellationToken)
         {
-            return await _productRepo.GetByIdAsync(query.EntityId);
+            return await _studentRepo.GetByIdAsync(query.EntityId);
         }
     }
 }

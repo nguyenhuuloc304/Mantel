@@ -7,4 +7,18 @@
     <RootNamespace>Mantel.Grade_Service.API</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="12.5.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.17">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Mantel.Common\Mantel.Common.csproj" />
+    <ProjectReference Include="..\Mantel.Grade-Service.Application\Mantel.Grade-Service.Application.csproj" />
+    <ProjectReference Include="..\Mantel.Grade-Service.Infrastructure\Mantel.Grade-Service.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>

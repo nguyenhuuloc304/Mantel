@@ -7,4 +7,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Mantel.Common.Data\Mantel.Common.Data.csproj" />
+  </ItemGroup>
+
 </Project>
