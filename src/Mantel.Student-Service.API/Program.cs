@@ -1,3 +1,4 @@
+using Mantel.Common.Filters;
 using Mantel.Common.Startup.Swagger;
 using Mantel.Student_Service.Application.Features.Students.Queries;
 using Mantel.Student_Service.Application.Mapping;
@@ -21,6 +22,11 @@ builder.Services.AddMediatR(config =>
 {
     config.RegisterServicesFromAssembly(assembly);
     config.RegisterServicesFromAssembly(typeof(GetAllStudentsQuery).Assembly);
+});
+
+builder.Services.AddControllers(options =>
+{
+    options.Filters.Add<GlobalExceptionFilter>();
 });
 
 builder.Services.AddScoped<IStudentRepository, StudentRepository>();

@@ -1,3 +1,4 @@
+using Mantel.Common.Filters;
 using Mantel.Common.Startup.Swagger;
 using Mantel.Course_Service.Application.Features.Courses.Queries;
 using Mantel.Course_Service.Application.Mapping;
@@ -26,6 +27,11 @@ builder.Services.AddMediatR(config =>
 {
     config.RegisterServicesFromAssembly(assembly);
     config.RegisterServicesFromAssembly(typeof(GetAllCoursesQuery).Assembly);
+});
+
+builder.Services.AddControllers(options =>
+{
+    options.Filters.Add<GlobalExceptionFilter>();
 });
 
 builder.Services.AddScoped<ICourseRepository, CourseRepository>();

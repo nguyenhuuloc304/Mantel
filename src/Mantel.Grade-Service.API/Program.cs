@@ -1,3 +1,4 @@
+using Mantel.Common.Filters;
 using Mantel.Common.Startup.Swagger;
 using Mantel.Grade_Service.Application.Features.Grades.Queries;
 using Mantel.Grade_Service.Application.Mapping;
@@ -26,6 +27,11 @@ builder.Services.AddMediatR(config =>
 {
     config.RegisterServicesFromAssembly(assembly);
     config.RegisterServicesFromAssembly(typeof(GetAllGradesQuery).Assembly);
+});
+
+builder.Services.AddControllers(options =>
+{
+    options.Filters.Add<GlobalExceptionFilter>();
 });
 
 builder.Services.AddScoped<IGradeRepository, GradeRepository>();

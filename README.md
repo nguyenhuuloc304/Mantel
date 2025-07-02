@@ -1,10 +1,5 @@
-TBC
+This is sample solution for microservices + clean architecture which including:
+- 3 services (1 Service using MS SQL and two others using CosmosDB)
+- 1 API Gateway with Yarp
 
-This is sample solution for microservice + clean architecture which including:
-- 3 services
-- 1 Gateway with Yarp
-- 1 Service using MS SQL and two others using CosmosDB
-
-Notice: Not finish yet. I'm still adding and clean up code.
-
-When accomplishing, I'll put more description and guideline.
+As time constrain I cannot initialize entire solution for realistic project including communication between services (sync with HTTP, async with message broker), saga (distributed transaction), cache, observability (logs, metric, tracking, alert), network architecture, etc ...
