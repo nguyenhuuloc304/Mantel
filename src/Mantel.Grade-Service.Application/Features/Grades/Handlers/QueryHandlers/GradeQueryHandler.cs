@@ -25,13 +25,13 @@ namespace Mantel.Grade_Service.Application.Features.Grades.Handlers.QueryHandler
 
         public async Task<PagedQueryResult<Grade>> Handle(GetAllGradesQuery query, CancellationToken cancellationToken)
         {
-            var dataQueryable = _gradeRepo.GetAllGrades();
-            var data = await dataQueryable.Skip((query.Page - 1) * query.PageSize)
+            var dataQueryable = await _gradeRepo.GetAllAsync();
+            var data = dataQueryable.Skip((query.Page - 1) * query.PageSize)
                                     .Take(query.PageSize)
-                                    .ToListAsync();
+                                    .ToList();
             var totalItemCount = dataQueryable.Count();
 
-            return new PagedQueryResult<Grade>(data, totalItemCount, query.Page, query.PageSize);
+            return new PagedQueryResult<Grade>(dataQueryable, totalItemCount, query.Page, query.PageSize);
         }
 
         public async Task<Grade> Handle(GetGradeByIdQuery query, CancellationToken cancellationToken)

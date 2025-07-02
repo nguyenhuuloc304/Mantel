@@ -2,9 +2,19 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>Mantel.Course_Service.API</RootNamespace>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="12.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Mantel.Common\Mantel.Common.csproj" />
+    <ProjectReference Include="..\Mantel.Course-Service.Application\Mantel.Course-Service.Application.csproj" />
+    <ProjectReference Include="..\Mantel.Course-Service.Infrastructure\Mantel.Course-Service.Infrastructure.csproj" />
+  </ItemGroup>
 
 </Project>

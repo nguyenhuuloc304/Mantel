@@ -9,8 +9,15 @@ namespace Mantel.Grade_Service.Domain.Entities
 {
     public class Grade : BaseEntity
     {
-        public Guid StudentId { get; private set; }
-        public Guid CourseId { get; private set; }
-        public double Value { get; private set; }
+        public Guid StudentId { get; set; }
+        public Guid CourseId { get; set; }
+        public double Value { get; set; }
+
+        private Grade() { }
+
+        public void UpdateValue(double newValue)
+        {
+            Value = newValue;
+        }
     }
 }

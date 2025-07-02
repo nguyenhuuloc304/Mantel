@@ -16,6 +16,7 @@ namespace Mantel.Grade_Service.Application.Mapping
         public AutoMapperProfile()
         {
             CreateMap<GradeDto, Grade>();
+            CreateMap<Grade, GradeDto>();
             CreateMap<CreateGradeCommand, Grade>();
             CreateMap<UpdateGradeCommand, Grade>();
         }

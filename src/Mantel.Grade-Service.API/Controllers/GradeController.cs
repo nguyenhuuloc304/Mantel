@@ -38,7 +38,7 @@ namespace Mantel.Grade_Service.API.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateGrade([FromBody] CreateGradeCommand command)
         {
-            var result = await _mediator.Send(command);
+             var result = await _mediator.Send(command);
             return Ok(result);
         }
 

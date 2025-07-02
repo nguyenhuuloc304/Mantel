@@ -35,8 +35,8 @@ namespace Mantel.Course_Service.Application.Features.Courses.Handlers.CommandHan
                 throw new ApplicationException("Issue with mapper");
             }
 
-            var newCourse = await _courseRepo.AddAsync(courseEntity);
-            var courseResponse = _mapper.Map<CourseDto>(newCourse);
+            await _courseRepo.AddAsync(courseEntity);
+            var courseResponse = _mapper.Map<CourseDto>(courseEntity);
             return courseResponse;
         }
 
@@ -48,7 +48,7 @@ namespace Mantel.Course_Service.Application.Features.Courses.Handlers.CommandHan
                 throw new ApplicationException("Issue with mapper");
             }
 
-            await _courseRepo.UpdateAsync(courseEntity.EntityId, courseEntity);
+            await _courseRepo.UpdateAsync(courseEntity);
             var courseResponse = _mapper.Map<CourseDto>(courseEntity);
             return courseResponse;
         }
@@ -58,7 +58,7 @@ namespace Mantel.Course_Service.Application.Features.Courses.Handlers.CommandHan
             var course = await _courseRepo.GetByIdAsync(request.EntityId);
             if (course != null)
             {
-                await _courseRepo.DeleteAsync(course);
+                await _courseRepo.DeleteAsync(course.EntityId);
             }
 
             return new CourseDto();

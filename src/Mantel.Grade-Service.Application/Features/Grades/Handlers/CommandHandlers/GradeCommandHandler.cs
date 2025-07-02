@@ -35,8 +35,8 @@ namespace Mantel.Grade_Service.Application.Features.Grades.Handlers.CommandHandl
                 throw new ApplicationException("Issue with mapper");
             }
 
-            var newGrade = await _gradeRepo.AddAsync(gradeEntity);
-            var gradeResponse = _mapper.Map<GradeDto>(newGrade);
+            await _gradeRepo.AddAsync(gradeEntity);
+            var gradeResponse = _mapper.Map<GradeDto>(gradeEntity);
             return gradeResponse;
         }
 
@@ -48,7 +48,7 @@ namespace Mantel.Grade_Service.Application.Features.Grades.Handlers.CommandHandl
                 throw new ApplicationException("Issue with mapper");
             }
 
-            await _gradeRepo.UpdateAsync(gradeEntity.EntityId, gradeEntity);
+            await _gradeRepo.UpdateAsync(gradeEntity);
             var gradeResponse = _mapper.Map<GradeDto>(gradeEntity);
             return gradeResponse;
         }
@@ -58,9 +58,8 @@ namespace Mantel.Grade_Service.Application.Features.Grades.Handlers.CommandHandl
             var grade = await _gradeRepo.GetByIdAsync(request.EntityId);
             if (grade != null)
             {
-                await _gradeRepo.DeleteAsync(grade);
+                await _gradeRepo.DeleteAsync(grade.EntityId);
             }
-
             return new GradeDto();
         }
     }

@@ -16,8 +16,5 @@ namespace Mantel.Common.Data
         public Guid ModifiedByUserId { get; set; }
         public DateTime ModifiedDate { get; set; }
         public bool IsDeleted { get; set; }
-
-        [Timestamp]
-        public byte[]? TimeStamp { get; set; }
     }
 }
