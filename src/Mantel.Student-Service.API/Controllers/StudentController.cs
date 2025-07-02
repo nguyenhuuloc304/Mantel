@@ -1,7 +1,12 @@
-﻿using Mantel.Student_Service.Application.DTOs;
-using Mantel.Student_Service.Application.Interfaces;
+﻿using Mantel.Common.Paging;
+using Mantel.Student_Service.Application.DTOs;
+using Mantel.Student_Service.Application.Features.Students.Commands;
+using Mantel.Student_Service.Application.Features.Students.Queries;
+using Mantel.Student_Service.Domain.Entities;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -11,56 +16,49 @@ namespace Mantel.Student_Service.API.Controllers
     [ApiController]
     public class StudentController : ControllerBase
     {
-        private readonly IStudentService _student;
+        private readonly IMediator _mediator;
 
-        public StudentController(IStudentService student)
+        public StudentController(IMediator mediator)
         {
-            _student = student;
+            _mediator = mediator;
         }
         // GET: api/<StudentController>
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<PagedQueryResult<Student>> Get()
         {
-            return Ok(await _student.GetAllStudents());
+            return await _mediator.Send(new GetAllStudentsQuery());
         }
 
         // GET api/<StudentController>/5
         [HttpGet("{guidId}")]
         public async Task<IActionResult> Get(Guid guidId)
         {
-            return Ok(await _student.GetAStudent(guidId));
+            return Ok(await _mediator.Send(new GetStudentByIdQuery() { EntityId = guidId }));
         }
 
         // POST api/<StudentController>
         [HttpPost]
-        public void Post([FromBody] CreateStudentRequestDto request)
+        public async Task<IActionResult> CreateStudent([FromBody] CreateStudentCommand command)
         {
-            if (request == null)
-            {
-                throw new ArgumentNullException(nameof(request), "Request cannot be null");
-            }
-
-            // Call the service to create a student
-            _student.CreateAStudent(request);
+            var result = await _mediator.Send(command);
+            return Ok(result);
         }
 
         // PUT api/<StudentController>/5
         [HttpPut("{guidId}")]
-        public void Put(int guidId, [FromBody] CreateStudentRequestDto request)
+        public async Task<IActionResult> UpdateStudent(int guidId, [FromBody] UpdateStudentCommand command)
         {
-            if (request == null)
-            {
-                throw new ArgumentNullException(nameof(request), "Request cannot be null");
-            }
-
-            // Call the service to update a student
-            _student.CreateAStudent(request);
+            var result = await _mediator.Send(command);
+            return Ok(result);
         }
 
         // DELETE api/<StudentController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<ActionResult<StudentDto>> DeleteProduct(Guid id, [FromBody] DeleteStudentCommand command)
         {
+            command.EntityId = id;
+            var result = await _mediator.Send(command);
+            return Ok(result);
         }
     }
 }

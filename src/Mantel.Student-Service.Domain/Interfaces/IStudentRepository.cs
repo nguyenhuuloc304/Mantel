@@ -10,12 +10,6 @@ namespace Mantel.Student_Service.Domain.Interfaces
 {
     public interface IStudentRepository : IBaseRepository<Student>
     {
-        Task<Student> GetById(Guid studentGuid);
-
-        Task<List<Student>> GetByIdsAsync(List<Guid> studentGuids);
-
-        Task<Student> CreateAsync(Student student);
-
-        Task<List<Student>> GetAllAsync();
+        IQueryable<Student> GetAllStudent();
     }
 }

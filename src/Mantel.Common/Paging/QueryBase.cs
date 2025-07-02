@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Mantel.ServiceA.Application.Interfaces
+namespace Mantel.Common.Paging
 {
-    internal class IAEntity1Repository
+    public abstract class QueryBase : IQuery
     {
     }
 }

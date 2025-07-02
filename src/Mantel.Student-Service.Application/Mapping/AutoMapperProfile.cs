@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Mantel.Student_Service.Application.DTOs;
+using Mantel.Student_Service.Application.Features.Students.Commands;
 using Mantel.Student_Service.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,9 @@ namespace Mantel.Student_Service.Application.Mapping
     {
         public AutoMapperProfile()
         {
-            CreateMap<CreateStudentRequestDto, Student>();
+            CreateMap<StudentDto, Student>();
+            CreateMap<CreateStudentCommand, Student>();
+            CreateMap<UpdateStudentCommand, Student>();
         }
     }
 }

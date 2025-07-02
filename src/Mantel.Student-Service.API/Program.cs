@@ -1,10 +1,10 @@
 using Mantel.Common.Startup.Swagger;
-using Mantel.Student_Service.Application.Interfaces;
+using Mantel.Student_Service.Application.Features.Students.Queries;
 using Mantel.Student_Service.Application.Mapping;
-using Mantel.Student_Service.Application.Services;
 using Mantel.Student_Service.Domain.Interfaces;
 using Mantel.Student_Service.Infrastructure.Data;
 using Mantel.Student_Service.Infrastructure.Repositories;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,14 +16,19 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddControllers();
 builder.RegisterSwagger();
 
-builder.Services.AddScoped<IStudentService, StudentService>();
+var assembly = typeof(Program).Assembly;
+builder.Services.AddMediatR(config =>
+{
+    config.RegisterServicesFromAssembly(assembly);
+    config.RegisterServicesFromAssembly(typeof(GetAllStudentsQuery).Assembly);
+});
+
 builder.Services.AddScoped<IStudentRepository, StudentRepository>();
 
 builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 
 var app = builder.Build();
 
-app.MapGet("/", () => "Hello World!");
 app.MapControllers();
 
 app.AddSwaggerUI();

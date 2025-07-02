@@ -25,60 +25,85 @@ namespace Mantel.Common.Data
         {
             Context = context;
             Logger = NullLogger.Instance;
-
         }
-        public virtual IQueryable<TModel> GetAll()
+
+        public async Task<IReadOnlyList<TModel>> GetAllAsync()
         {
-
-            IQueryable<TModel> query = Context.Set<TModel>();
-            return query;
+            return await Context.Set<TModel>()
+                .ToListAsync();
         }
 
-#if NET6_0_OR_GREATER
-        public virtual async Task<TModel?> FindById(object id)
+        public async Task<TModel> GetByIdAsync(Guid id)
         {
             return await Context.Set<TModel>().FindAsync(id);
         }
-#else
-        public virtual async Task<TModel> FindById(object id)
-        {
-            return await Context.Set<TModel>().FindAsync(id);
-        }
-#endif
 
-        public virtual async Task<IEnumerable<TModel>> FindAll()
-        {
-            return await Context.Set<TModel>().ToListAsync();
-        }
-
-        public virtual async Task<int> Count()
-        {
-            return await Context.Set<TModel>().CountAsync();
-        }
-
-        public virtual async Task<TModel> Add(TModel entity)
+        public async Task<TModel> AddAsync(TModel entity)
         {
             await Context.Set<TModel>().AddAsync(entity);
-
+            await Context.SaveChangesAsync();
             return entity;
         }
 
-        public virtual TModel Update(TModel entity)
+        public async Task UpdateAsync(Guid id, TModel entity)
         {
-            var dbEntityEntry = Context.Entry(entity);
-            dbEntityEntry.State = EntityState.Modified;
-
-            return entity;
-        }
-        public virtual void Delete(TModel entity)
-        {
-            var dbEntityEntry = Context.Entry(entity);
-            dbEntityEntry.State = EntityState.Deleted;
-        }
-
-        public virtual async Task Save()
-        {
+            var oldItem = await GetByIdAsync(id);
+            Context.Entry(oldItem).CurrentValues.SetValues(entity);
             await Context.SaveChangesAsync();
         }
+
+        public async Task DeleteAsync(TModel entity)
+        {
+            Context.Set<TModel>().Remove(entity);
+            await Context.SaveChangesAsync();
+        }
+
+        //public virtual IQueryable<TModel> GetAll()
+        //{
+
+        //    IQueryable<TModel> query = Context.Set<TModel>();
+        //    return query;
+        //}
+
+        //public virtual async Task<TModel?> FindById(object id)
+        //{
+        //    return await Context.Set<TModel>().FindAsync(id);
+        //}
+
+        //public virtual async Task<IEnumerable<TModel>> FindAll()
+        //{
+        //    return await Context.Set<TModel>().ToListAsync();
+        //}
+
+        //public virtual async Task<int> Count()
+        //{
+        //    return await Context.Set<TModel>().CountAsync();
+        //}
+
+        //public virtual async Task<TModel> Add(TModel entity)
+        //{
+        //    await Context.Set<TModel>().AddAsync(entity);
+
+        //    return entity;
+        //}
+
+        //public virtual TModel Update(TModel entity)
+        //{
+        //    var dbEntityEntry = Context.Entry(entity);
+        //    dbEntityEntry.State = EntityState.Modified;
+
+        //    return entity;
+        //}
+        //public virtual void Delete(TModel entity)
+        //{
+        //    var dbEntityEntry = Context.Entry(entity);
+        //    dbEntityEntry.State = EntityState.Deleted;
+        //}
+
+        //public virtual async Task Save()
+        //{
+        //    await Context.SaveChangesAsync();
+        //}
+
     }
 }

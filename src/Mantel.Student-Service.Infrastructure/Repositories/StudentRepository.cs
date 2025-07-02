@@ -22,21 +22,20 @@ namespace Mantel.Student_Service.Infrastructure.Repositories
             return await Context.Students.FindAsync(studentGuid);
         }
 
-        public async Task<List<Student>> GetAllAsync()
+        public IQueryable<Student> GetAllStudent()
         {
-            return await GetAll().ToListAsync();
+            var dataQuery = Context.Students.AsQueryable();
+            return dataQuery;
         }
 
-        public override IQueryable<Student> GetAll()
+        public Task<Student> GetById(Guid studentGuid)
         {
-            return base.GetAll();
+            throw new NotImplementedException();
         }
 
-        public async Task<Student> CreateAsync(Student student)
+        public Task<List<Student>> GetByIdsAsync(List<Guid> studentGuids)
         {
-            var created = await Add(student);
-            await Save();
-            return created;
+            throw new NotImplementedException();
         }
     }
 }

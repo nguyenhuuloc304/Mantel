@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Mantel.Student_Service.Application.DTOs
 {
-    public class CreateStudentResponseDto
+    public class StudentDto
     {
         public Guid EntityId { get; set; }
         public string FirstName { get; set; } = string.Empty;

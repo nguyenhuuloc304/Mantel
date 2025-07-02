@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Mantel.ServiceA.Domain.Entities
+namespace Mantel.Common.Paging
 {
-    internal class AEntity2
+    public interface IQuery
     {
     }
 }
